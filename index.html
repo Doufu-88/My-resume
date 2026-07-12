@@ -1,0 +1,1004 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>张锦杰 | 软件测试工程师 · NEURAL INTERFACE</title>
+<style>
+/* ============================================================
+   FUTURISTIC TECH THEME — NEURAL INTERFACE
+   ============================================================ */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Noto+Sans+SC:wght@300;400;500;700&display=swap');
+
+:root {
+  --bg-deep: #0a0a0f;
+  --bg-card: rgba(10,14,26,0.85);
+  --cyan: #00f0ff;
+  --magenta: #d400ff;
+  --gold: #ffd700;
+  --green: #00ff88;
+  --blue: #4488ff;
+  --border-glow: rgba(0,240,255,0.25);
+  --text-primary: #e0e8f0;
+  --text-secondary: #8899bb;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Noto Sans SC', 'Orbitron', -apple-system, sans-serif;
+  color: var(--text-primary);
+  background: var(--bg-deep);
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+
+/* ============================================================
+   STARFIELD CANVAS BACKGROUND
+   ============================================================ */
+#starfield {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 0; pointer-events: none;
+}
+
+/* ── Grid overlay ── */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    linear-gradient(rgba(0,240,255,0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0,240,255,0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  animation: gridPulse 4s ease-in-out infinite;
+}
+@keyframes gridPulse {
+  0%, 100% { opacity: 0.6; }
+  50% { opacity: 1; }
+}
+
+/* ── Scanlines ── */
+body::after {
+  content: '';
+  position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 2px,
+    rgba(0,0,0,0.04) 2px,
+    rgba(0,0,0,0.04) 4px
+  );
+}
+
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+
+/* ============================================================
+   NAV — Holographic
+   ============================================================ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(8,10,20,0.82);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-glow);
+  box-shadow: 0 0 30px rgba(0,240,255,0.08);
+  padding: 0 2rem;
+}
+.nav-inner {
+  max-width: 1000px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 56px;
+}
+.nav-logo {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem; font-weight: 700;
+  background: linear-gradient(90deg, var(--cyan), var(--magenta));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 2px;
+}
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a {
+  font-size: 0.85rem; color: var(--text-secondary);
+  letter-spacing: 1px; text-transform: uppercase;
+  transition: all 0.3s; position: relative;
+  font-family: 'Orbitron', sans-serif;
+}
+.nav-links a::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 0; height: 2px;
+  background: var(--cyan);
+  box-shadow: 0 0 10px var(--cyan);
+  transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--cyan); text-shadow: 0 0 12px var(--cyan); }
+.nav-links a:hover::after { width: 100%; }
+
+/* ============================================================
+   HERO
+   ============================================================ */
+.hero {
+  position: relative; z-index: 1;
+  min-height: 100vh; display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 6rem 2rem 4rem;
+}
+.hero-content { position: relative; z-index: 2; }
+
+/* ── Glitch Avatar ── */
+.avatar-wrap {
+  position: relative; display: inline-block; margin-bottom: 2rem;
+}
+.avatar-ring {
+  width: 150px; height: 150px; border-radius: 50%;
+  padding: 4px;
+  background: conic-gradient(var(--cyan), var(--magenta), var(--gold), var(--cyan));
+  animation: ringSpin 4s linear infinite;
+  box-shadow: 0 0 50px rgba(0,240,255,0.3), 0 0 100px rgba(212,0,255,0.15);
+}
+@keyframes ringSpin { to { transform: rotate(360deg); } }
+.avatar-inner {
+  width: 100%; height: 100%; border-radius: 50%;
+  background: #0a0e1a;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 3.5rem; color: var(--cyan);
+  text-shadow: 0 0 20px var(--cyan);
+}
+.avatar-scan {
+  position: absolute; top: -6px; left: -6px;
+  width: calc(100% + 12px); height: calc(100% + 12px);
+  border-radius: 50%; border: 2px solid transparent;
+  border-top-color: var(--cyan);
+  animation: ringSpin 2s linear infinite;
+  box-shadow: 0 0 15px var(--cyan);
+}
+
+.hero h1 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 3rem; font-weight: 900;
+  text-transform: uppercase; letter-spacing: 4px;
+  margin-bottom: 0.75rem;
+}
+.hero h1 .glitch {
+  position: relative;
+  background: linear-gradient(135deg, var(--cyan) 0%, var(--magenta) 50%, var(--gold) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: glitchText 3s infinite;
+}
+@keyframes glitchText {
+  0%, 90%, 100% { transform: none; opacity: 1; }
+  92% { transform: translate(-3px, 2px); opacity: 0.8; }
+  94% { transform: translate(3px, -1px); opacity: 0.9; }
+  96% { transform: none; opacity: 1; }
+}
+
+.hero .title-line {
+  font-size: 1.25rem; color: var(--text-secondary);
+  letter-spacing: 3px; margin-bottom: 0.5rem;
+  font-family: 'Orbitron', sans-serif;
+}
+.hero .title-line .cursor {
+  display: inline-block; width: 2px; height: 1.2em;
+  background: var(--cyan); margin-left: 4px; vertical-align: text-bottom;
+  animation: blink 0.8s step-end infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+.hero .tagline {
+  color: var(--text-secondary); max-width: 520px;
+  margin: 0 auto 2.5rem; font-size: 0.95rem; line-height: 1.8;
+}
+
+/* ── Data badges ── */
+.hero-stats {
+  display: flex; gap: 1.5rem; justify-content: center;
+  margin-bottom: 2.5rem; flex-wrap: wrap;
+}
+.stat {
+  text-align: center; padding: 0.8rem 1.5rem;
+  background: var(--bg-card); border: 1px solid var(--border-glow);
+  border-radius: 8px;
+  backdrop-filter: blur(8px);
+}
+.stat .num {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.5rem; font-weight: 700;
+  color: var(--cyan); text-shadow: 0 0 10px var(--cyan);
+}
+.stat .label { font-size: 0.7rem; color: var(--text-secondary); letter-spacing: 2px; text-transform: uppercase; }
+
+/* ── Buttons ── */
+.hero-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.75rem 2rem; border-radius: 4px;
+  font-family: 'Orbitron', sans-serif; font-size: 0.8rem;
+  font-weight: 600; letter-spacing: 2px; text-transform: uppercase;
+  cursor: pointer; transition: all 0.35s; border: none;
+  position: relative; overflow: hidden;
+  clip-path: polygon(8px 0, 100% 0, calc(100% - 8px) 100%, 0 100%);
+}
+.btn-primary {
+  background: transparent; color: var(--cyan);
+  border: 1px solid var(--cyan);
+  box-shadow: 0 0 20px rgba(0,240,255,0.2), inset 0 0 20px rgba(0,240,255,0.05);
+}
+.btn-primary:hover {
+  background: rgba(0,240,255,0.1);
+  box-shadow: 0 0 40px rgba(0,240,255,0.4), inset 0 0 30px rgba(0,240,255,0.1);
+  transform: translateY(-2px);
+}
+.btn-outline {
+  background: transparent; color: var(--magenta);
+  border: 1px solid var(--magenta);
+  box-shadow: 0 0 20px rgba(212,0,255,0.15), inset 0 0 20px rgba(212,0,255,0.03);
+}
+.btn-outline:hover {
+  background: rgba(212,0,255,0.1);
+  box-shadow: 0 0 40px rgba(212,0,255,0.35);
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   SECTIONS COMMON
+   ============================================================ */
+section { position: relative; z-index: 1; padding: 5rem 2rem; }
+.section-inner { max-width: 960px; margin: 0 auto; }
+
+.section-badge {
+  display: inline-block; padding: 0.3rem 1.2rem;
+  font-family: 'Orbitron', sans-serif; font-size: 0.65rem;
+  letter-spacing: 4px; text-transform: uppercase;
+  border: 1px solid var(--cyan); color: var(--cyan);
+  border-radius: 2px; margin-bottom: 1.2rem;
+  box-shadow: 0 0 12px rgba(0,240,255,0.2);
+}
+.section-title {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2rem; font-weight: 800;
+  letter-spacing: 3px; text-transform: uppercase;
+  margin-bottom: 0.6rem;
+  background: linear-gradient(180deg, #fff 0%, var(--cyan) 100%);
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.section-title.center { text-align: center; }
+.section-subtitle {
+  text-align: center; color: var(--text-secondary);
+  margin-bottom: 3rem; font-size: 0.95rem;
+}
+.divider {
+  display: flex; align-items: center; justify-content: center;
+  gap: 1rem; margin-bottom: 3rem;
+}
+.divider .line {
+  width: 60px; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+}
+.divider .diamond {
+  width: 8px; height: 8px;
+  background: var(--cyan);
+  transform: rotate(45deg);
+  box-shadow: 0 0 12px var(--cyan);
+}
+
+/* ============================================================
+   ABOUT — Holographic Panel
+   ============================================================ */
+#about { background: rgba(6,10,20,0.5); }
+.about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: start; }
+.about-text p {
+  color: var(--text-secondary); margin-bottom: 1rem;
+  font-size: 0.95rem; line-height: 1.9;
+}
+
+.info-panel {
+  background: var(--bg-card); border: 1px solid var(--border-glow);
+  border-radius: 8px; padding: 1.5rem;
+  box-shadow: 0 0 25px rgba(0,240,255,0.06), inset 0 0 25px rgba(0,240,255,0.02);
+  position: relative; overflow: hidden;
+}
+.info-panel::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, var(--cyan), var(--magenta), transparent);
+}
+.info-row {
+  display: flex; align-items: center; gap: 0.8rem;
+  padding: 0.7rem 0; border-bottom: 1px solid rgba(0,240,255,0.08);
+  font-size: 0.9rem; color: var(--text-secondary);
+}
+.info-row:last-child { border-bottom: none; }
+.info-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--cyan); box-shadow: 0 0 6px var(--cyan);
+  flex-shrink: 0;
+}
+.info-label { color: var(--text-primary); font-weight: 600; min-width: 70px; letter-spacing: 1px; font-size: 0.8rem; }
+.info-panel .status { color: var(--green); text-shadow: 0 0 6px var(--green); }
+
+/* ============================================================
+   SKILLS — Hex Grid
+   ============================================================ */
+.skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.5rem; }
+
+.skill-card {
+  position: relative;
+  background: var(--bg-card); border: 1px solid var(--border-glow);
+  border-radius: 6px; padding: 2rem 1.5rem; text-align: center;
+  transition: all 0.4s; overflow: hidden;
+  clip-path: polygon(0 12px, 12px 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%);
+}
+.skill-card::before {
+  content: ''; position: absolute; top: -50%; left: -50%;
+  width: 200%; height: 200%;
+  background: radial-gradient(circle, rgba(0,240,255,0.06) 0%, transparent 60%);
+  opacity: 0; transition: opacity 0.4s;
+}
+.skill-card:hover::before { opacity: 1; }
+.skill-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--cyan);
+  box-shadow: 0 0 40px rgba(0,240,255,0.2), inset 0 0 40px rgba(0,240,255,0.03);
+}
+.skill-card .corner {
+  position: absolute; width: 12px; height: 12px; border-color: var(--cyan); border-style: solid;
+  transition: all 0.4s;
+}
+.skill-card .corner.tl { top: 0; left: 0; border-width: 2px 0 0 2px; }
+.skill-card .corner.br { bottom: 0; right: 0; border-width: 0 2px 2px 0; }
+.skill-card:hover .corner { width: 20px; height: 20px; box-shadow: 0 0 8px var(--cyan); }
+
+.skill-icon {
+  font-size: 2.8rem; margin-bottom: 0.75rem;
+  filter: drop-shadow(0 0 8px rgba(0,240,255,0.4));
+}
+.skill-card h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.95rem; color: var(--text-primary);
+  letter-spacing: 1px; margin-bottom: 0.5rem;
+}
+.skill-bar-wrap { margin-top: 0.75rem; }
+.skill-bar-bg {
+  height: 3px; background: rgba(255,255,255,0.08);
+  border-radius: 2px; overflow: hidden;
+}
+.skill-bar-fill {
+  height: 100%; border-radius: 2px;
+  background: linear-gradient(90deg, var(--cyan), var(--magenta));
+  box-shadow: 0 0 10px var(--cyan);
+  transition: width 1.5s ease;
+}
+.skill-tag {
+  display: inline-block; margin: 0.25rem;
+  padding: 0.2rem 0.7rem; border-radius: 3px;
+  font-size: 0.75rem; color: var(--text-secondary);
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.03);
+}
+
+/* ============================================================
+   EXPERIENCE — Digital Timeline
+   ============================================================ */
+.timeline { position: relative; padding-left: 2.5rem; }
+.timeline::before {
+  content: ''; position: absolute; left: 10px; top: 0; bottom: 0;
+  width: 2px;
+  background: linear-gradient(180deg, var(--cyan), var(--magenta), var(--cyan));
+  box-shadow: 0 0 12px var(--cyan);
+}
+.timeline-item { position: relative; margin-bottom: 3rem; padding-left: 2rem; }
+.timeline-dot {
+  position: absolute; left: -2.3rem; top: 4px;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: #0a0e1a;
+  border: 3px solid var(--cyan);
+  box-shadow: 0 0 16px var(--cyan), inset 0 0 6px rgba(0,240,255,0.3);
+  z-index: 2;
+}
+.timeline-item:hover .timeline-dot {
+  background: var(--cyan);
+  box-shadow: 0 0 30px var(--cyan);
+}
+.timeline-card {
+  background: var(--bg-card); border: 1px solid var(--border-glow);
+  border-radius: 6px; padding: 1.5rem;
+  transition: all 0.3s;
+}
+.timeline-item:hover .timeline-card {
+  border-color: var(--cyan);
+  box-shadow: 0 0 30px rgba(0,240,255,0.12);
+}
+.timeline-card h3 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1rem; color: var(--text-primary);
+  letter-spacing: 1px; margin-bottom: 0.35rem;
+}
+.timeline-card .meta {
+  font-size: 0.8rem; color: var(--cyan);
+  text-shadow: 0 0 6px var(--cyan);
+  letter-spacing: 2px; margin-bottom: 0.6rem;
+}
+.timeline-card p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.8; }
+
+/* ============================================================
+   CONTACT — Neon Cards
+   ============================================================ */
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1.5rem; }
+.contact-card {
+  text-align: center; padding: 2rem 1.5rem;
+  background: var(--bg-card); border: 1px solid var(--border-glow);
+  border-radius: 8px; transition: all 0.35s; cursor: pointer;
+  position: relative; overflow: hidden;
+}
+.contact-card::after {
+  content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--cyan), transparent);
+  opacity: 0; transition: opacity 0.35s;
+}
+.contact-card:hover::after { opacity: 1; }
+.contact-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--cyan);
+  box-shadow: 0 8px 40px rgba(0,240,255,0.15);
+}
+.contact-card .icon {
+  font-size: 2.2rem; margin-bottom: 0.6rem;
+  filter: drop-shadow(0 0 8px rgba(0,240,255,0.3));
+}
+.contact-card h4 {
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.85rem; color: var(--text-primary);
+  letter-spacing: 1px; margin-bottom: 0.4rem;
+}
+.contact-card span, .contact-card a {
+  font-size: 0.82rem; color: var(--text-secondary);
+  transition: color 0.3s;
+}
+.contact-card:hover span, .contact-card:hover a { color: var(--cyan); }
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+footer {
+  position: relative; z-index: 1;
+  text-align: center; padding: 2rem;
+  border-top: 1px solid var(--border-glow);
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.75rem; color: var(--text-secondary);
+  letter-spacing: 2px;
+}
+footer .pulse {
+  display: inline-block; width: 8px; height: 8px; border-radius: 50%;
+  background: var(--green); margin-right: 6px;
+  box-shadow: 0 0 8px var(--green);
+  animation: pulse 2s ease-in-out infinite;
+}
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(1.5); }
+}
+
+/* ============================================================
+   DIGITAL RAIN (small, subtle)
+   ============================================================ */
+.digital-rain {
+  position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+  z-index: 0; pointer-events: none; opacity: 0.06;
+}
+
+/* ============================================================
+   SCROLL REVEAL
+   ============================================================ */
+.reveal {
+  opacity: 0; transform: translateY(40px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+.reveal.visible { opacity: 1; transform: none; }
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 1.8rem; letter-spacing: 2px; }
+  .hero .title-line { font-size: 0.95rem; }
+  .about-grid { grid-template-columns: 1fr; }
+  .section-title { font-size: 1.4rem; }
+  .nav-links { gap: 1rem; }
+  .nav-links a { font-size: 0.7rem; }
+  .hero-stats { gap: 0.8rem; }
+  .stat { padding: 0.6rem 1rem; }
+  .stat .num { font-size: 1.2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============ STARFIELD ============ -->
+<canvas id="starfield"></canvas>
+
+<!-- ============ DIGITAL RAIN ============ -->
+<canvas class="digital-rain" id="rain"></canvas>
+
+<!-- ============ NAV ============ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">◈ NEURAL.INTERFACE</a>
+    <ul class="nav-links">
+      <li><a href="#about">// 关于</a></li>
+      <li><a href="#skills">// 技能</a></li>
+      <li><a href="#experience">// 经历</a></li>
+      <li><a href="#projects">// 项目</a></li>
+      <li><a href="#contact">// 联系</a></li>
+    </ul>
+  </div>
+</nav>
+
+<!-- ============ HERO ============ -->
+<header class="hero">
+  <div class="hero-content">
+    <div class="avatar-wrap">
+      <div class="avatar-ring">
+        <div class="avatar-inner">ZJJ</div>
+      </div>
+      <div class="avatar-scan"></div>
+    </div>
+
+    <h1>
+      <span style="color:var(--text-secondary);">SYS.</span><span class="glitch">张锦杰</span>
+    </h1>
+    <p class="title-line">
+      &gt; 软件测试工程师<span class="cursor"></span>
+    </p>
+    <p class="tagline">
+      「 2025届本科毕业生 · 2年软件测试经验 · 随时到岗 」<br>
+      熟练使用 AI 脚本自动化生成高覆盖测试用例 · 接口测试 · 全链路功能测试
+    </p>
+
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="num" data-count="2">0</div>
+        <div class="label">Years Exp</div>
+      </div>
+      <div class="stat">
+        <div class="num" data-count="3">0</div>
+        <div class="label">Projects</div>
+      </div>
+      <div class="stat">
+        <div class="num" data-count="8">0</div>
+        <div class="label">Skills</div>
+      </div>
+    </div>
+
+    <div class="hero-btns">
+      <a href="#contact" class="btn btn-primary">▶ 建立连接</a>
+      <a href="#about" class="btn btn-outline">◈ 查看档案</a>
+    </div>
+  </div>
+</header>
+
+<!-- ============ ABOUT ============ -->
+<section id="about">
+  <div class="section-inner">
+    <div style="text-align:center;">
+      <span class="section-badge">[ 模块 · 01 ]</span>
+    </div>
+    <h2 class="section-title center">个人档案</h2>
+    <div class="divider">
+      <span class="line"></span><span class="diamond"></span><span class="line"></span>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text reveal">
+        <p>▸ 你好！我是张锦杰，2025年毕业于湛江科技学院计算机科学与技术专业，拥有 2 年软件测试经验。</p>
+        <p>▸ 熟练使用 Claude Code + Skills 的 AI 脚本自动化来生成高覆盖落地型测试用例，擅长接口测试、全链路功能测试及多端兼容性测试。</p>
+        <p>▸ 目前正在求职系统测试岗位，可随时到岗。对新技术保持热情，具备良好的自主学习能力和团队协作精神。</p>
+        <p>▸ <strong>个人优势：</strong>具有良好的团队意识善于沟通，能够在项目中有效协作。具有良好的心态和责任感，善于在压力下保持高效工作，勇于面对挑战。具有自主学习能力，勤于学习不断提升自我能力。</p>
+        <p>▸ <strong>爱好：</strong>弹唱、说唱、篮球、羽毛球、跑步、健身</p>
+      </div>
+      <div class="info-panel reveal">
+        <div class="info-row">
+          <span class="info-dot"></span>
+          <span class="info-label">LOCATION</span>
+          <span>[ 广东肇庆 ]</span>
+        </div>
+        <div class="info-row">
+          <span class="info-dot" style="background:var(--magenta);box-shadow:0 0 6px var(--magenta);"></span>
+          <span class="info-label">DEGREE</span>
+          <span>计算机科学与技术 本科</span>
+        </div>
+        <div class="info-row">
+          <span class="info-dot" style="background:var(--gold);box-shadow:0 0 6px var(--gold);"></span>
+          <span class="info-label">STATUS</span>
+          <span class="status">● 离职-随时到岗</span>
+        </div>
+        <div class="info-row">
+          <span class="info-dot"></span>
+          <span class="info-label">EMAIL</span>
+          <span>1325326842@qq.com</span>
+        </div>
+        <div class="info-row">
+          <span class="info-dot"></span>
+          <span class="info-label">LANG</span>
+          <span>中文 / English</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ SKILLS ============ -->
+<section id="skills" style="background:rgba(6,10,20,0.4);">
+  <div class="section-inner">
+    <div style="text-align:center;">
+      <span class="section-badge" style="border-color:var(--magenta);color:var(--magenta);box-shadow:0 0 12px rgba(212,0,255,0.2);">[ 模块 · 02 ]</span>
+    </div>
+    <h2 class="section-title center">技术矩阵</h2>
+    <div class="divider">
+      <span class="line"></span><span class="diamond" style="background:var(--magenta);box-shadow:0 0 12px var(--magenta);"></span><span class="line"></span>
+    </div>
+
+    <div class="skills-grid">
+      <!-- Card 1 -->
+      <div class="skill-card reveal">
+        <div class="corner tl"></div><div class="corner br"></div>
+        <div class="skill-icon">🔌</div>
+        <h3>接口测试</h3>
+        <div style="margin-top:0.5rem;">
+          <span class="skill-tag">Postman</span><span class="skill-tag">JMeter</span><span class="skill-tag">接口回归</span><span class="skill-tag">压测</span>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:90%;"></div></div>
+        </div>
+      </div>
+      <!-- Card 2 -->
+      <div class="skill-card reveal">
+        <div class="corner tl"></div><div class="corner br"></div>
+        <div class="skill-icon">🛠️</div>
+        <h3>测试工具</h3>
+        <div style="margin-top:0.5rem;">
+          <span class="skill-tag">Fiddler</span><span class="skill-tag">Charles</span><span class="skill-tag">Selenium</span>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:85%;"></div></div>
+        </div>
+      </div>
+      <!-- Card 3 -->
+      <div class="skill-card reveal">
+        <div class="corner tl"></div><div class="corner br"></div>
+        <div class="skill-icon">🗄️</div>
+        <h3>数据库</h3>
+        <div style="margin-top:0.5rem;">
+          <span class="skill-tag">MySQL</span><span class="skill-tag">DataGrip</span><span class="skill-tag">SQL</span>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:80%;"></div></div>
+        </div>
+      </div>
+      <!-- Card 4 -->
+      <div class="skill-card reveal">
+        <div class="corner tl"></div><div class="corner br"></div>
+        <div class="skill-icon">🤖</div>
+        <h3>AI 应用</h3>
+        <div style="margin-top:0.5rem;">
+          <span class="skill-tag">Claude Code</span><span class="skill-tag">AI自动化</span><span class="skill-tag">Skills</span>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:88%;"></div></div>
+        </div>
+      </div>
+      <!-- Card 5 -->
+      <div class="skill-card reveal">
+        <div class="corner tl"></div><div class="corner br"></div>
+        <div class="skill-icon">📋</div>
+        <h3>项目管理</h3>
+        <div style="margin-top:0.5rem;">
+          <span class="skill-tag">Tapd</span><span class="skill-tag">禅道</span><span class="skill-tag">GitHub</span><span class="skill-tag">draw.io</span>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:82%;"></div></div>
+        </div>
+      </div>
+      <!-- Card 6 -->
+      <div class="skill-card reveal">
+        <div class="corner tl"></div><div class="corner br"></div>
+        <div class="skill-icon">💻</div>
+        <h3>编程语言</h3>
+        <div style="margin-top:0.5rem;">
+          <span class="skill-tag">C#</span><span class="skill-tag">JAVA</span><span class="skill-tag">Python</span>
+        </div>
+        <div class="skill-bar-wrap">
+          <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:75%;"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ EXPERIENCE ============ -->
+<section id="experience">
+  <div class="section-inner">
+    <div style="text-align:center;">
+      <span class="section-badge" style="border-color:var(--gold);color:var(--gold);box-shadow:0 0 12px rgba(255,215,0,0.2);">[ 模块 · 03 ]</span>
+    </div>
+    <h2 class="section-title center">时间线记录</h2>
+    <div class="divider">
+      <span class="line"></span><span class="diamond" style="background:var(--gold);box-shadow:0 0 12px var(--gold);"></span><span class="line"></span>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <h3>系统测试 · 珠海博线通科技</h3>
+          <p class="meta">2025.09 ── 2026.05</p>
+          <p>根据产品需求编写测试用例，覆盖正常流程、参数异常、空值、越界、权限不足等接口边界场景。使用 JMeter 对业务后端接口进行全量调试，通过 Charles 抓包定位接口传参错误，联动 DataGrip 执行 SQL 校验数据一致性。批量运行 Postman 接口集合执行回归测试，输出接口测试报告。</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot" style="border-color:var(--magenta);box-shadow:0 0 16px var(--magenta);"></div>
+        <div class="timeline-card">
+          <h3>鸿蒙测试 · 软通动力</h3>
+          <p class="meta" style="color:var(--magenta);text-shadow:0 0 6px var(--magenta);">2025.02 ── 2025.05</p>
+          <p>了解系统业务需求，设计测试用例，对系统进行功能、兼容性测试，定位 bug 并复现问题过程。反馈缺陷管理系统，协同开发处理缺陷及优化系统，修复后进行回归测试，达到项目闭环，确保系统正常使用上线。</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot" style="border-color:var(--gold);box-shadow:0 0 16px var(--gold);"></div>
+        <div class="timeline-card">
+          <h3>数据标注员 · 嘉创科技</h3>
+          <p class="meta" style="color:var(--gold);text-shadow:0 0 6px var(--gold);">2024.07 ── 2024.09</p>
+          <p>对百度用户搜索内容进行内容分析、归类，对时间、内容、搜索结果精准度进行标注。整合团队数据，个人匹配准确率达到 98%。</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot" style="border-color:var(--cyan);box-shadow:0 0 16px var(--cyan);"></div>
+        <div class="timeline-card">
+          <h3>计算机科学与技术 本科 · 湛江科技学院</h3>
+          <p class="meta" style="color:var(--cyan);text-shadow:0 0 6px var(--cyan);">2021.09 ── 2025.06</p>
+          <p>主修 C#、JAVA、Python 等面向对象编程语言，数据结构、数据库原理、算法设计与分析。在校期间担任吉他社副社长，组织策划社团活动和大型演出。担任班级文娱委员，积极组织班级和学校文娱体育活动。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ PROJECTS ============ -->
+<section id="projects">
+  <div class="section-inner">
+    <div style="text-align:center;">
+      <span class="section-badge" style="border-color:var(--green);color:var(--green);box-shadow:0 0 12px rgba(0,255,136,0.2);">[ 模块 · 04 ]</span>
+    </div>
+    <h2 class="section-title center">项目经验</h2>
+    <div class="divider">
+      <span class="line"></span><span class="diamond" style="background:var(--green);box-shadow:0 0 12px var(--green);"></span><span class="line"></span>
+    </div>
+
+    <div class="timeline">
+      <div class="timeline-item reveal">
+        <div class="timeline-dot"></div>
+        <div class="timeline-card">
+          <h3>项目一：美容养生预约系统</h3>
+          <p class="meta">全业务流程测试平台</p>
+          <p><strong>项目介绍：</strong>负责香港澳门某连锁美容养生行业线上服务平台测试，系统包含用户端、商家端、商家管理后台三端，支持门店预约、技师排班、项目购买、次卡/储值消费、核销、会员管理及营销活动等全业务流程，服务线下多家连锁门店日常经营。</p>
+          <p><strong>负责模块：</strong>用户预约下单、改约/取消预约、到店核销、储值/次卡管理、优惠券营销、订单优惠签约审核、技师排班管理、门店订单管理、会员档案、收银结算模块。</p>
+          <p><strong>主要工作：</strong>重点校验预约时段冲突、技师排班规则、多人并发预约边界场景；覆盖支付抵扣、退款回滚、会员次卡扣次、财务对账等资金链路；开展多端兼容性测试、版本迭代回归测试、线上bug验证。</p>
+          <p style="color:var(--green);"><strong>项目成果：</strong>精准发现预约规则异常、金额计算偏差、反馈信息有误、优惠等缺陷；保障门店高峰期预约系统稳定，有效降低线下收银对账错误率，保证业务平稳上线迭代。</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot" style="border-color:var(--magenta);box-shadow:0 0 16px var(--magenta);"></div>
+        <div class="timeline-card">
+          <h3>项目二：电商购物交易系统</h3>
+          <p class="meta" style="color:var(--magenta);text-shadow:0 0 6px var(--magenta);">B2C 电商全链路测试</p>
+          <p><strong>项目介绍：</strong>参与B2C电商交易平台全流程测试，涵盖前端用户购物链路与后端运营管理体系，支持商品上架、购物车、下单支付、物流发货、售后退换货、优惠营销、订单修改、库存(出仓、入仓、点仓)管控等核心电商业务。</p>
+          <p><strong>负责模块：</strong>商品管理、购物车、订单结算、支付流程、售后退款/换货、优惠券/满减活动、库存管理、订单后台管理模块。</p>
+          <p><strong>测试工作：</strong>负责电商全链路功能测试，限购、多规格库存同步、超卖拦截；覆盖多种优惠叠加规则、金额上限校验、部分/全额退款、订单状态流转等复杂场景；进行接口入参校验、状态回调校验、异常场景测试。</p>
+        </div>
+      </div>
+      <div class="timeline-item reveal">
+        <div class="timeline-dot" style="border-color:var(--gold);box-shadow:0 0 16px var(--gold);"></div>
+        <div class="timeline-card">
+          <h3>项目三：连锁门店收银及进销存系统</h3>
+          <p class="meta" style="color:var(--gold);text-shadow:0 0 6px var(--gold);">线下连锁门店管理</p>
+          <p><strong>项目介绍：</strong>面向线下连锁门店的收银零售与库存管理系统，实现门店收银、商品进销存、库存盘点、小票打印、多门店数据汇总，支撑门店日常零售与物料耗材管理。</p>
+          <p><strong>负责模块：</strong>门店收银结算、商品出入库、库存盘点、退换货收银、交接班对账、耗材库存管理、数据报表模块。</p>
+          <p><strong>测试工作：</strong>针对收银金额计算、找零、抵扣、退款重做全场景测试；重点验证库存扣减、入库出库数据一致性、盘点差异校验；小票打印异常场景；核对每日、月对账流水、门店数据汇总准确性。</p>
+          <p style="color:var(--green);"><strong>项目成果：</strong>解决库存不同步、收银对账偏差、异常操作数据错乱等问题，保障门店收银与库存数据精准统一，降低门店经营数据风险。</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CONTACT ============ -->
+<section id="contact" style="background:rgba(6,10,20,0.4);">
+  <div class="section-inner">
+    <div style="text-align:center;">
+      <span class="section-badge">[ 模块 · 05 ]</span>
+    </div>
+    <h2 class="section-title center">建立连接</h2>
+    <div class="divider">
+      <span class="line"></span><span class="diamond"></span><span class="line"></span>
+    </div>
+
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <div class="icon">📡</div>
+        <h4>EMAIL</h4>
+        <a href="mailto:1325326842@qq.com">1325326842@qq.com</a>
+      </div>
+      <div class="contact-card reveal">
+        <div class="icon">🔐</div>
+        <h4>PHONE</h4>
+        <span>13534984137</span>
+      </div>
+      <div class="contact-card reveal">
+        <div class="icon">📂</div>
+        <h4>GITHUB</h4>
+        <a href="https://github.com/zhangjinjie" target="_blank">github.com/zhangjinjie</a>
+      </div>
+      <div class="contact-card reveal">
+        <div class="icon">📍</div>
+        <h4>LOCATION</h4>
+        <span>广东 · 肇庆</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer>
+  <span class="pulse"></span>
+  SYSTEM ONLINE &nbsp;|&nbsp; © 2026 张锦杰 · NEURAL.INTERFACE &nbsp;|&nbsp; SYSTEM TEST ENGINEER
+</footer>
+
+<!-- ============================================================
+     SCRIPTS — Starfield + Digital Rain + Scroll Reveal + Counter
+     ============================================================ -->
+<script>
+// ==================== STARFIELD ====================
+(function() {
+  const canvas = document.getElementById('starfield');
+  const ctx = canvas.getContext('2d');
+  let stars = [];
+  let w, h;
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  resize();
+  window.addEventListener('resize', () => { resize(); initStars(); });
+
+  function initStars() {
+    stars = [];
+    const count = Math.floor((w * h) / 1800);
+    for (let i = 0; i < count; i++) {
+      stars.push({
+        x: Math.random() * w,
+        y: Math.random() * h,
+        r: Math.random() * 1.8 + 0.3,
+        speed: Math.random() * 0.4 + 0.08,
+        opacity: Math.random(),
+        pulse: Math.random() * Math.PI * 2
+      });
+    }
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, w, h);
+    stars.forEach(s => {
+      s.pulse += 0.015;
+      const alpha = s.opacity + Math.sin(s.pulse) * 0.25;
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(180,210,255,${Math.max(0.1, alpha)})`;
+      ctx.fill();
+
+      // Glow for larger stars
+      if (s.r > 1.2) {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r * 2.5, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(0,200,255,${Math.max(0.02, alpha * 0.15)})`;
+        ctx.fill();
+      }
+    });
+    requestAnimationFrame(draw);
+  }
+
+  initStars();
+  draw();
+
+  // Parallax on mouse
+  document.addEventListener('mousemove', e => {
+    const mx = (e.clientX / w - 0.5) * 0.03;
+    const my = (e.clientY / h - 0.5) * 0.03;
+    canvas.style.transform = `translate(${mx * 30}px, ${my * 30}px)`;
+  });
+})();
+
+// ==================== DIGITAL RAIN ====================
+(function() {
+  const canvas = document.getElementById('rain');
+  const ctx = canvas.getContext('2d');
+  let w, h;
+  const chars = 'アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲン0123456789';
+  const fontSize = 16;
+  let columns = [];
+  let drops = [];
+
+  function resize() {
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+    columns = Math.floor(w / fontSize);
+    drops = [];
+    for (let i = 0; i < columns; i++) {
+      drops[i] = Math.random() * -100;
+    }
+  }
+  resize();
+  window.addEventListener('resize', resize);
+
+  function draw() {
+    ctx.fillStyle = 'rgba(0,0,0,0.04)';
+    ctx.fillRect(0, 0, w, h);
+    ctx.fillStyle = '#0f0';
+    ctx.font = fontSize + 'px monospace';
+    for (let i = 0; i < drops.length; i++) {
+      const char = chars[Math.floor(Math.random() * chars.length)];
+      const x = i * fontSize;
+      const y = drops[i] * fontSize;
+      ctx.fillStyle = 'rgba(0,255,100,0.18)';
+      ctx.fillText(char, x, y);
+      ctx.fillStyle = 'rgba(180,255,220,0.35)';
+      ctx.fillText(char, x, y - 2);
+      if (y > h && Math.random() > 0.975) drops[i] = 0;
+      drops[i]++;
+    }
+  }
+  setInterval(draw, 50);
+})();
+
+// ==================== SCROLL REVEAL ====================
+(function() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+})();
+
+// ==================== COUNTER ANIMATION ====================
+(function() {
+  const observed = new Set();
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting && !observed.has(e.target)) {
+        observed.add(e.target);
+        const el = e.target;
+        const target = parseInt(el.dataset.count);
+        const duration = 1800;
+        const start = performance.now();
+        function tick(now) {
+          const p = Math.min((now - start) / duration, 1);
+          const eased = 1 - Math.pow(1 - p, 3); // ease-out
+          el.textContent = Math.floor(eased * target);
+          if (p < 1) requestAnimationFrame(tick);
+          else el.textContent = target;
+        }
+        requestAnimationFrame(tick);
+      }
+    });
+  }, { threshold: 0.6 });
+  document.querySelectorAll('[data-count]').forEach(el => obs.observe(el));
+})();
+</script>
+
+</body>
+</html>
